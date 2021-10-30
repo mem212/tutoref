@@ -32,7 +32,7 @@ const config = {
       }),
     ],
   ],
-
+  plugins: ['@docusaurus/plugin-google-analytics'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -99,6 +99,11 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      googleAnalytics: {
+        trackingID: 'UA-126228996-1',
+        // Optional fields.
+        anonymizeIP: true, // Should IPs be anonymized?
       },
     }),
 };
