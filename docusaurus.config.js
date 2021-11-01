@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { SitemapAndIndexStream } = require('sitemap');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -24,15 +25,32 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
+          editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
-  ],
-  plugins: ['@docusaurus/plugin-google-analytics'],
+  ], 
+  plugins: [
+    [
+      '@docusaurus/plugin-google-analytics',
+    {
+      id: "analytics-main"
+    }
+    ],
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+        id: "main-sitemap",
+        changefreq: 'weekly',
+        priority: 0.5,
+        trailingSlash: false,
+      }
+    ],
+  ] ,
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -85,7 +103,7 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: '/blog',
+                href: 'https://anyukdkdkd/blog',
               },
               {
                 label: 'GitHub',
@@ -109,3 +127,4 @@ const config = {
 };
 
 module.exports = config;
+
