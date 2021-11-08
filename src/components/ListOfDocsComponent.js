@@ -3,6 +3,10 @@ import {usePluginData} from '@docusaurus/useGlobalData';
 
 export default function ListOfDocsComponent(pros) {
 
+  function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+  }
+
   const docsPluginData = usePluginData('docusaurus-plugin-content-docs');
   let docs = docsPluginData.versions[0].docs;
   let itemList=[];
@@ -11,12 +15,15 @@ export default function ListOfDocsComponent(pros) {
       let titleParts=title.split("/");
       if(titleParts.length > 0) {
           title = titleParts[titleParts.length -1];
-          return title.replaceAll("-"," ");
+          title = replaceAll(title, "-"," ");
+          return title;
       }
       return title;
   };
   docs.forEach((doc,index)=>{
-    if(!doc.path.toString().startsWith(previousPath)){
+    if(!doc.path.toString().startsWith("previousPath")){
+        let _title = formatDocTitle(doc.path.toString());
+        if(_title!="")
         itemList.push( <li key={index}><a style={{textTransform: "capitalize"}} href={doc.path}>{formatDocTitle(doc.path.toString())}</a></li>);
         previousPath=doc.path.toString();
     }
