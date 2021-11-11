@@ -11,9 +11,34 @@ hide_title: true
 hide_table_of_contents: true
 ---
 
+import Image from '@theme/IdealImage';
+import bgImage from '@site/static/img/home-desert-bg.jpg';
 import MediaCard from '/src/components/card';
+import styles from '@site/src/css/homeDocs.css';
+import clsx from 'clsx';
+import HomeParticles from '/src/components/HomeParticles';
 
-<div className="row">
+
+<div className="hero homeBgWrapper">
+    <div className="homeBgText">
+      <h1 className="hero__title">tutoref.com</h1>
+      <p className="hero__subtitle">Tutorials and Code Examples_</p><br/>
+      <a className="button button--secondary button--lg" href="#home_container">Start Learning 📖</a>
+    </div>
+    <div className="homeBgImg">
+      <Image img={bgImage} />
+    </div>
+    <div className="homeParticles">
+      <HomeParticles/>
+    </div>
+</div>
+
+
+<div className="row categories_container" id="home_container">
   <MediaCard title="Software Development" icon="programming.png" link="/software-developement" description="Tutorials related to software developement and programming using various programming languages and technologies"  />
+  <MediaCard title="Miscellaneous" icon="miscellaneous.png" link="/miscellaneous" description="Various Tutorials, how-to guides and code examples related to different computer science subjects."  />
+  <MediaCard title="Miscellaneous" icon="miscellaneous.png" link="/miscellaneous" description="Various Tutorials, how-to guides and code examples related to different computer science subjects."  />
+  <MediaCard title="Miscellaneous" icon="miscellaneous.png" link="/miscellaneous" description="Various Tutorials, how-to guides and code examples related to different computer science subjects."  />
+  <MediaCard title="Miscellaneous" icon="miscellaneous.png" link="/miscellaneous" description="Various Tutorials, how-to guides and code examples related to different computer science subjects."  />
   <MediaCard title="Miscellaneous" icon="miscellaneous.png" link="/miscellaneous" description="Various Tutorials, how-to guides and code examples related to different computer science subjects."  />
 </div>

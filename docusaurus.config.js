@@ -48,6 +48,7 @@ const config = {
         trailingSlash: false,
       }
     ],
+    '@docusaurus/plugin-ideal-image',
   ] ,
 
   themeConfig:
