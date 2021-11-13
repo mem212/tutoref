@@ -19,7 +19,7 @@ export default function MediaCard(props) {
     };
 
     return (
-      <div className="col col--4 margin-bottom--lg" >
+      <div className="col col--3 margin-bottom--lg" >
         <Card sx={{ maxWidth: 345}}>
             <div style={justifyContentStyle}>
                 <CardMedia

@@ -28,3 +28,6 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 }
 
 
+.footer__col {
+  margin-left:1rem !important;
+}

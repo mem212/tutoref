@@ -44,11 +44,9 @@ const config = {
       {
         id: "main-sitemap",
         changefreq: 'weekly',
-        priority: 0.5,
-        trailingSlash: false,
+        priority: 0.5
       }
-    ],
-    '@docusaurus/plugin-ideal-image',
+    ]
   ] ,
 
   themeConfig:

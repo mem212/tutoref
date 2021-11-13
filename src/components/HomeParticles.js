@@ -17,7 +17,7 @@ export default function HomeParticles(pros) {
               events: {
                 onHover: {
                   enable: true,
-                  mode: "repulse"
+                  mode: ["connect","grab"],
                 },
                 onClick: {
                     enable: false,
