@@ -19,6 +19,7 @@
     background: url("/static/img/home-desert-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    max-height: 420px;
 }
 
 .homeParticles {
@@ -50,7 +51,7 @@
 }
 
 .categories_container{
-    padding-top: 12%;
+    padding-top: 5%;
     padding-left: 2%;
     padding-right: 2%;
 }
