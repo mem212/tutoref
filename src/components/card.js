@@ -24,7 +24,7 @@ export default function MediaCard(props) {
             <div style={justifyContentStyle}>
                 <CardMedia
                 component="img"
-                image={"/static/img/cards/"+props.icon}
+                image={"/img/cards/"+props.icon}
                 alt="green iguana"
                 sx={{width: 128}}
                 />
