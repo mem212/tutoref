@@ -8,7 +8,7 @@ const { SitemapAndIndexStream } = require('sitemap');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TutoRef.com',
-  tagline: 'Tutorials and Code Examples  ',
+  tagline: 'Tutorials and Code Examples_',
   url: 'https://tutoref.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -63,7 +63,7 @@ const config = {
             type: 'doc',
             docId: 'index',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Home',
           },
         ],
       },
@@ -71,10 +71,10 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Home',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Home',
                 to: '/',
               },
             ],

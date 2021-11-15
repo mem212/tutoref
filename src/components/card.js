@@ -33,7 +33,7 @@ export default function MediaCard(props) {
             <Typography gutterBottom variant="h5" component="div" sx={justifyContentStyle}>
                 {props.title}
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{display: 'flex',  textAlign:'center', alignItems:'center'}}>
+            <Typography variant="body2" color="text.secondary" sx={{display: 'flex',  textAlign:'center', alignItems:'center', height: "50px"}}>
                 {props.description}
             </Typography>
             </CardContent>

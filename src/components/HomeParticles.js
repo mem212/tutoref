@@ -59,7 +59,7 @@ export default function HomeParticles(pros) {
                 enable: true,
                 outMode: "bounce",
                 random: true,
-                speed: 3,
+                speed: 2,
                 straight: false,
               },
               number: {
