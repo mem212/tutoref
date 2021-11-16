@@ -65,17 +65,38 @@ const config = {
             position: 'left',
             label: 'Home',
           },
+          {
+            label: 'Java',
+            to: '/java',
+          },
+          {
+            label: 'Miscellaneous',
+            to: '/miscellaneous',
+          },
+          {
+            label: 'Tags',
+            href: '/tags',
+            position: 'right',
+          },
         ],
       },
       footer: {
         style: 'dark',
         links: [
           {
-            title: 'Home',
+            title: 'Quick Links',
             items: [
               {
                 label: 'Home',
                 to: '/',
+              },
+              {
+                label: 'Miscellaneous',
+                to: '/miscellaneous',
+              },
+              {
+                label: 'Tags',
+                to: '/tags',
               },
             ],
           },
@@ -83,16 +104,8 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'Facebook',
+                href: 'https://www.facebook.com/tutoref',
               },
             ],
           },
@@ -100,17 +113,17 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                href: 'https://anyukdkdkd/blog',
+                label: 'Online Tools',
+                to: '/tools',
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: 'Common Problems',
+                href: '/common-exceptions-and-errors',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} tutoref.com Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
