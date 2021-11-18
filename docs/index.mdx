@@ -16,6 +16,7 @@ import styles from '/src/css/homeDocs.css';
 import clsx from 'clsx';
 import HomeParticles from '/src/components/HomeParticles';
 import SmootScroll from '/src/components/SmootScroll';
+import { BackgroundImage } from 'react-image-and-background-image-fade'
 
 <div className="hero homeBgWrapper">
     <div className="homeBgText">
@@ -23,7 +24,15 @@ import SmootScroll from '/src/components/SmootScroll';
       <p className="hero__subtitle">Tutorials and Code Examples_</p><br/>
       <SmootScroll elementId="home_container" cName="button button--secondary button--lg" txt="Start Learning 📖" />
     </div>
-    <div className="homeBgImg"></div>
+    <div className="homeBgImg" id="homeBgImg">
+      <BackgroundImage
+        src='/static/img/home-desert-bg.jpg'
+        width='100%'
+        height='100%'
+        backgroundSize='cover'
+        lazyLoad
+      />
+    </div>
     <div className="homeParticles">
       <HomeParticles/>
     </div>
