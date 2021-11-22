@@ -14,7 +14,7 @@ export default function ListOfDocsComponent(props) {
   function formatDocTitle(title) {
       let titleParts=title.split("/");
       if(titleParts.length > 0) {
-          title = titleParts[titleParts.length -1];
+          title = titleParts[titleParts.length -2];
           title = replaceAll(title, "-"," ");
           return title;
       }
