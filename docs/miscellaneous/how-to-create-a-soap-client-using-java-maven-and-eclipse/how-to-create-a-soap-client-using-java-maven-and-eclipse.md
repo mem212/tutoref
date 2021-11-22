@@ -1,5 +1,5 @@
 ---
-slug: "/how-to-create-a-soap-client-using-java-maven-and-eclipse"
+slug: "/how-to-create-a-soap-client-using-java-maven-and-eclipse/"
 title: "How to create a SOAP client using java, maven and eclipse"
 ---
 

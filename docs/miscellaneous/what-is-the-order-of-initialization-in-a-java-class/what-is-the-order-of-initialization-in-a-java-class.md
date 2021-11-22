@@ -1,5 +1,5 @@
 ---
-slug: "/what-is-the-order-of-initialization-in-a-java-class"
+slug: "/what-is-the-order-of-initialization-in-a-java-class/"
 title: "What is the order of initialization in a Java class"
 sidebar_label: "What is the order of initialization in a Java class"
 keywords:

@@ -1,5 +1,5 @@
 ---
-slug: "/how-to-read-and-write-files-in-java-8"
+slug: "/how-to-read-and-write-files-in-java-8/"
 title: "How to read and write files in java 8"
 sidebar_label: "Introduction"
 sidebar_position: 1

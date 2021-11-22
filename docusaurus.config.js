@@ -16,7 +16,7 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'tutoref', // Usually your GitHub org/user name.
   projectName: 'tutoref', // Usually your repo name.
-
+  trailingSlash: true,
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -67,15 +67,15 @@ const config = {
           },
           {
             label: 'Java',
-            to: '/java',
+            to: '/java/',
           },
           {
             label: 'Miscellaneous',
-            to: '/miscellaneous',
+            to: '/miscellaneous/',
           },
           {
             label: 'Tags',
-            href: '/tags',
+            href: '/tags/',
             position: 'right',
           },
         ],
@@ -92,11 +92,11 @@ const config = {
               },
               {
                 label: 'Miscellaneous',
-                to: '/miscellaneous',
+                to: '/miscellaneous/',
               },
               {
                 label: 'Tags',
-                to: '/tags',
+                to: '/tags/',
               },
             ],
           },
@@ -114,11 +114,11 @@ const config = {
             items: [
               {
                 label: 'Online Tools',
-                to: '/tools',
+                to: '/tools/',
               },
               {
                 label: 'Common Problems',
-                href: '/common-exceptions-and-errors',
+                href: '/common-exceptions-and-errors/',
               },
             ],
           },

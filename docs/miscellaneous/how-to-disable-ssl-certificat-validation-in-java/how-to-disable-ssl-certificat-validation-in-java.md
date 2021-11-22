@@ -1,5 +1,5 @@
 ---
-slug: "/how-to-disable-ssl-certificat-validation-in-java"
+slug: "/how-to-disable-ssl-certificat-validation-in-java/"
 title: "How to disable SSL certificat validation in Java"
 ---
 

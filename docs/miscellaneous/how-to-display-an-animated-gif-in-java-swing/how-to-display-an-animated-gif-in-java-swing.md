@@ -1,5 +1,5 @@
 ---
-slug: "/how-to-display-an-animated-gif-in-java-swing"
+slug: "/how-to-display-an-animated-gif-in-java-swing/"
 title: "How to display an animated gif in java swing"
 ---
 The type ImageIcon (sub-type of Icon) allows to display an animated GIF. Example :

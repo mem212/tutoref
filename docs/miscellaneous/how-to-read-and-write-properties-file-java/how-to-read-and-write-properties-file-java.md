@@ -1,5 +1,5 @@
 ---
-slug: "/how-to-read-and-write-properties-file"
+slug: "/how-to-read-and-write-properties-file/"
 title: "How to read and write Properties file in java 8"
 ---
 

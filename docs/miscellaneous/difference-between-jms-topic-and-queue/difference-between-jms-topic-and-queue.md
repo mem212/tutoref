@@ -1,5 +1,5 @@
 ---
-slug: "/difference-between-jms-topic-and-queue"
+slug: "/difference-between-jms-topic-and-queue/"
 title: "Difference between JMS Topic and Queue"
 sidebar_label: "Difference between JMS Topic and Queue"
 keywords:

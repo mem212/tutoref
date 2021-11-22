@@ -1,5 +1,5 @@
 ---
-slug: "/how-to-prevent-firefox-and-chrome-from-forcing-dev-and-foo-domains-to-use-https"
+slug: "/how-to-prevent-firefox-and-chrome-from-forcing-dev-and-foo-domains-to-use-https/"
 title: "How to prevent Firefox and Chrome from forcing dev and foo domains to use https"
 ---
 
