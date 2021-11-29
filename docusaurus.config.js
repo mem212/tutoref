@@ -46,7 +46,8 @@ const config = {
         changefreq: 'weekly',
         priority: 0.5
       }
-    ]
+    ],
+    'docusaurus-plugin-google-adsense',
   ] ,
 
   themeConfig:
@@ -134,6 +135,9 @@ const config = {
         // Optional fields.
         anonymizeIP: true, // Should IPs be anonymized?
       },
+      googleAdsense: {
+        dataAdClient: 'ca-pub-8667333994890115',
+      }
     }),
 };
 
