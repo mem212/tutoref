@@ -1,6 +1,0 @@
-
-Best practices
-
-https://www.tutorialspoint.com/software_testing_dictionary/unit_testing.htm
-https://dzone.com/articles/unit-testing-best-practices-how-to-get-the-most-ou
-https://www.testim.io/blog/unit-testing-best-practices/
