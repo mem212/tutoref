@@ -16,9 +16,11 @@ $ yarn start
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 
+
 ### Accessing the website locally
 
 By default the website will run locally on port 3000: http://localhost:3000/
+
 
 
 

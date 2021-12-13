@@ -42,7 +42,7 @@ A Unit test is written as code, and that code should be written in a way that an
 
 It means that anyone should understand what is the expected result when a specific input is provided, or a condition is met.
 
-Naming unit tests has also an impact of the descriptiveness of unit tests. In general, you should define or adopt an existing naming convention and stick to it.
+Naming unit tests has also an impact on the descriptiveness of unit tests. In general, you should define or adopt an existing naming convention and stick to it.
 
 Following are some examples using java / JUnit.
 

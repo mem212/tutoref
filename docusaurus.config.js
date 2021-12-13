@@ -129,6 +129,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['java']
       },
       googleAnalytics: {
         trackingID: 'UA-126228996-1',
