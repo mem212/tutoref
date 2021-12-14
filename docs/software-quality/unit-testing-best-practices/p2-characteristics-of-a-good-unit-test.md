@@ -42,36 +42,7 @@ A Unit test is written as code, and that code should be written in a way that an
 
 It means that anyone should understand what is the expected result when a specific input is provided, or a condition is met.
 
-Naming unit tests has also an impact on the descriptiveness of unit tests. In general, you should define or adopt an existing naming convention and stick to it.
 
-Following are some examples using java / JUnit.
-
-Consider a **calculateTotal()** method that calculates the total price of a list of products.
-
-**bad examples**
-```java
-@Test
-public void test1(){
-    // some code...    
-}
-
-@Test
-public void testCalculateTotal(){
-    // This is too general and doesn't tell the expected behavior
-    // under what conditions    
-}
-
-```
-
-**good example**
-
-```java
-@Test
-public void calcluateTotal_Should_Return_Zero_When_No_Products(){
-    // some code ...
-}
-
-```
 
 ## Repeatable
 

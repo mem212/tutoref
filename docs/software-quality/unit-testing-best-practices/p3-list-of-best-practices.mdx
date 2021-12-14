@@ -34,13 +34,62 @@ A trustworthy unit test is a test you can trust. It means that it should fail wh
 
 If these two conditions are not met then our unit test is trustworthy.
 
+> account bank, deposit 10,   assert account bank has money some money in it ,,, not enough, your method can add wrong number and the test will still be successful.
+
 
 ## Write descriptive unit tests
 
-readable + simple
-talk about naming conventions
+A unit test should be descriptive. If a colleague is reading your test case then he/she sould undestand, without spending much effort, what does the test try to validates and how, what is the expected result and under what conditions.
 
-A unit test should be descriptive. If a colleague is reading your test case then he/she sould undestand what that test aims to validates and how, without spending much effort.
+Naming unit tests has also an impact on their descriptiveness. In general, you should define or adopt an existing naming convention and stick to it.
+
+There are many existing unit tests naming standards that you can follow and here are some of them:
+
+- **UnitUnderTest_StateUnderTest_ExpectedBehavior**
+  - This is a clean way to name your tests and makes them human readable. However you should consider renaming your unit tests if the name of unit under test changes.
+  - You can also switch the StateUnderTest and the ExpectedBehavior.
+- **Should_ExpectedBehavior_When_StateUnderTest**
+  - This standard brings some redunduncy by having the term "Should" everywhere in your unit tests, but 
+- **When_StateUnderTest_Expect_ExpectedBehavior**
+  - You notice that this naming standard does not contain the UnitUnderTest name (method, class, etc). This is OK since we are testing a behavior.
+
+
+
+Following are some examples using java / JUnit.
+
+Consider a **calculateTotal()** method that calculates the total price of a list of products.
+
+**bad examples**
+```java
+@Test
+public void test1(){
+    // this is the worse name you can give to your unit test    
+}
+
+@Test
+public void testCalculateTotal(){
+    // This is too general and doesn't tell the expected behavior
+    // under what conditions    
+}
+
+```
+**A few naming models**
+
+**good example**
+
+```java
+@Test
+public void calcluateTotal_Should_Return_Zero_When_No_Products(){
+    // some code ...
+}
+
+```
+
+There are many ...
+[UnitOfWork_StateUnderTest_ExpectedBehavior]
+
+The Should
+Should_ExpectedBehavior_When_StateUnderTest
 
 
 
