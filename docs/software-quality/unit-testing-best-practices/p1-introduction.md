@@ -16,14 +16,14 @@ description: "Unit testing best practices. JUnit best practices."
 ## Introduction
 
 ### Summary
-Unit testing is a great way to validate that a small unit code of meets its design and behaves as expected. A unit of code can be a class, a method, a static function or portion of these.
+Unit testing is a great way to validate that a small unit code of meets its design and behaves as expected. A unit of code can be a class, a method, a static function or a portion of these.
 
-In order to write good unit tests, programmers must take into consideration the characteristics of a good unit test and follow the unit testing best practices. This tutorial covers some best practices to keep in mind when you write unit tests.
+In order to write reliable unit tests, programmers must take into consideration the characteristics of a good unit test and follow unit testing best practices. This tutorial the most common best practices when it comes to writing unit tests.
 
-Examples in this tutorial are given in Java and Junit, but the principles behind can be applied to most programming languages and unit test frameworks.
+Examples in this tutorial are given in Java/Junit, but the principles can be applied to most programming languages and unit test frameworks.
 
 ### Prerequisites
-- Practical understanding of unit tests in at least one programming language.
+- Practical understanding of unit tests in Java or another programming language.
 
 
 

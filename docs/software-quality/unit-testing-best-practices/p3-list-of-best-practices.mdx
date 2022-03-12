@@ -4,10 +4,10 @@ title: "Unit testing best practices"
 sidebar_label: "List of best practices"
 sidebar_position: 3
 keywords:
-    - Unit testing
-    - Uni tests
     - Unit tests best practices
     - Unit testing best practices
+    - Unit testing
+    - Unit tests
     - Junit best practice
     - Trustworthy
     - Descriptive
@@ -30,110 +30,388 @@ description: "Unit testing best practices. Unit tests best practices, Trustworth
 
 ## Write trustworthy unit tests
 
-A trustworthy unit test is a test you can trust. It means that it should fail when the code is broken, and succeed when - and only when - the code behaves like expected. 
+A trustworthy unit test is a test you can trust. It should fail when the code is broken, and succeed when - and only when - the code behaves like expected. 
+If these two conditions are not met then the unit test is not trustworthy.
 
-If these two conditions are not met then our unit test is trustworthy.
+**Bad example**
 
-> account bank, deposit 10,   assert account bank has money some money in it ,,, not enough, your method can add wrong number and the test will still be successful.
+The following test is not trustworthy. According the test name, we want to validate that the balance updates accordingly after a deposit using the **deposit()** method. 
+One thing we notice right away is that the assertion we used is not enough: If for some reason the **deposit()** we will never know since the unit test will be still successful, which is not good.
+```java
+@Test
+void deposit_Should_Update_Balance_when_Non_Null_Amount_Provided(){
+    // arrange
+    double AMOUNT = 100.00;
+    BankAccount bankAccount = new BankAccount();
 
+    // act
+    bankAccount.deposit(AMOUNT);
+
+    // assert
+    assertTrue( bankAccount.getBalance() > 0  ) ;
+}
+```
+
+**Better**
+
+To make the unit test trustworthy, we need to define an expected balance and use a more accurate assertion:
+```java
+@Test
+void deposit_Should_Update_Balance_when_Non_Null_Amount_Provided(){
+    // arrange
+    double AMOUNT = 100.00;
+    double EXPECTED_BALANCE = 100.00;
+    BankAccount bankAccount = new BankAccount();
+
+    // act
+    bankAccount.deposit(AMOUNT);
+
+    // assert
+    assertEquals(EXPECTED_BALANCE, bankAccount.getBalance() );
+}
+```
+
+:::note 
+In java, it's a bad practice to use the primitive type double for real world monetary values. In production code, use more appropriate types like BigDecimal.
+:::
 
 ## Write descriptive unit tests
 
-A unit test should be descriptive. If a colleague is reading your test case then he/she sould undestand, without spending much effort, what does the test try to validates and how, what is the expected result and under what conditions.
+A unit test should be descriptive. If your colleague is reading your test case then he/she should understand - without spending much effort - what does the test do, what is the expected result and under what conditions.
 
-Naming unit tests has also an impact on their descriptiveness. In general, you should define or adopt an existing naming convention and stick to it.
+Naming unit tests has also an impact on the descriptiveness. In general, you should define or pick an existing naming convention and stick to it.
 
-There are many existing unit tests naming standards that you can follow and here are some of them:
+A few unit tests naming conventions do exist. Following are some examples :
 
 - **UnitUnderTest_StateUnderTest_ExpectedBehavior**
-  - This is a clean way to name your tests and makes them human readable. However you should consider renaming your unit tests if the name of unit under test changes.
-  - You can also switch the StateUnderTest and the ExpectedBehavior.
+  - This is a clean way to name your tests and make them human readable. However you should consider renaming your unit tests if the name of the component under test changes.
+  - You can also switch the order of StateUnderTest and the ExpectedBehavior.
 - **Should_ExpectedBehavior_When_StateUnderTest**
-  - This standard brings some redunduncy by having the term "Should" everywhere in your unit tests, but 
+  - This standard is nice but comes with some redundancy by having the term "Should" everywhere in your unit tests. 
 - **When_StateUnderTest_Expect_ExpectedBehavior**
-  - You notice that this naming standard does not contain the UnitUnderTest name (method, class, etc). This is OK since we are testing a behavior.
+  - You may notice here that this naming standard does not contain the UnitUnderTest name (method, class, etc). This is OK since we are testing a behavior.
 
+In addition to the above, coding conventions and programming best practices that you follow e when developing production code still apply when you write unit tests.
+This will make your unit tests more readable and clean.
 
+**Bad examples**
 
-Following are some examples using java / JUnit.
-
-Consider a **calculateTotal()** method that calculates the total price of a list of products.
-
-**bad examples**
-```java
-@Test
-public void test1(){
-    // this is the worse name you can give to your unit test    
-}
-
-@Test
-public void testCalculateTotal(){
-    // This is too general and doesn't tell the expected behavior
-    // under what conditions    
-}
-
-```
-**A few naming models**
-
-**good example**
+Consider the **calculateTotal()** method that calculates the total price of a list of products.
 
 ```java
 @Test
-public void calcluateTotal_Should_Return_Zero_When_No_Products(){
-    // some code ...
+void test1(){
+    // as you may expect, this is the worse name you can give to your unit test    
+}
+
+@Test
+void testCalculateTotal(){
+    // This is too general and doesn't tell what is the expected behavior
+    // and under what conditions    
 }
 
 ```
 
-There are many ...
-[UnitOfWork_StateUnderTest_ExpectedBehavior]
+**Better**
 
-The Should
-Should_ExpectedBehavior_When_StateUnderTest
+```java
+@Test
+void calcluateTotal_Should_Return_Zero_When_No_Products(){
+}
+
+
+@Test
+void Should_ThrowException_When_Max_Capacity_Reached(){
+}
+
+
+```
+
+:::note 
+With JUnit, you can use the @DisplayName name annotation to provide a custom name or description for your tests.
+:::
 
 
 
-In addition to the above, coding conventions and programming best practices that you put in practice when developing production code still apply when you write unit tests.
- This will make your unit tests more readable and clean.
+## Arrange-Act-Assert
 
-## Arrange Act Assert
+Your unit test should be well structured. The Arrange-Act-Assert is a commonly used pattern where you structure the test case code into three main sections :
 
-Arrange-Act-Assert AAA = Arrange Act Assert = well structured
+**1- Arrange**
 
+In this section, set-up whatever objects and variables your test case does need. This step can be complementary to the general set-up step if there are any (Example: methods marked with @Before or @BeforeEach annotations when using JUnit Jupiter).
+
+
+**2- Act**
+
+This is the step where you call the target behavior. In most of cases it will be a method call.
+
+**3- Assert**
+
+In this step you verify that the expected result match the obtained result. The assert step determines if the test case has failed or succeeded.
+It is OK ot have multiple assertions in the same test case as long as you test the same behavior.
+
+:::note
+You do not have to stick to the AAA comments, you can decide to not use them or replace them with your own comments as long as the separation between the setup, what is being tested, and verification steps is clear.
+:::
 
 ## Avoid multiple acts
 
-talk about multiple assertions
+When writing unit tests using the AAA pattern, try to include only one act per test case. If you need to call the Act behavior with different parameters then consider using parametrized tests. Frameworks like JUnit offer the support for creating parametrized unit tests
+Using this pattern can help developers to their focus on just one single case at a time. When the test fails it becomes easy to determine which "Act" is failing.
+
+**Bad example**
+
+Consider the static method NumbersUtility.isOdd() that returns true if the param number is odd.
+
+```java
+@Test
+void isOdd_ShouldReturnTrueForOddNumbers() {
+    assertTrue(NumbersUtility.isOdd(1));
+    assertTrue(NumbersUtility.isOdd(3));
+    assertTrue(NumbersUtility.isOdd(5));
+    assertTrue(NumbersUtility.isOdd(-3));
+    assertTrue(NumbersUtility.isOdd(Integer.MAX_VALUE));
+}
+```
+
+**Better**
+
+Using Junit support for parametrized tests. If the test fails, the framework will provide is with the parameter that did not satisfy the assertion.
+
+```java
+@ParameterizedTest
+@ValueSource(ints = {1, 3, 5, -3, 15, Integer.MAX_VALUE}) 
+void isOdd_ShouldReturnTrueForOddNumbers(int number) {
+    assertTrue(NumbersUtility.isOdd(number));
+}
+```
 
 ## Test one thing at a time
 
-talk about multiple assertions
+The Idea behind unit testing is to verify that each "separate" unit of your software is working as expected.
+Tests that verify combined components at the same time are generally called integration tests. Unit tests and integration tests both enhance the overall quality of production code but the reason of existing of each type of tests is different.
 
-Test a single unit of code
+When writing a test case, you should validate only one "thing" at a time. This way you will be focused only on that "thing" and when the test fails, you can address the problem without confusion or too much investigation.
+
+// ex : Sorting class, multiple methods, use two algorithms and compare the two results to a same expected
+
+**Bad example**
+
+In the following example, the SortUtils class offers a few methods to sort arrays. 
+The test case testSortUtils() is bad because it verifies **three methods** at once.
+```java
+
+@Test
+void testSortUtils(){
+
+    final int [] NUMBERS_ARRAY = {10, 1, 5 , -5, 0};
+    final int [] SORTED_ARRAY = {-5, 0, 1, 5, 10};
+
+    int [] quickSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    int [] bubbleSortResult = SortUtils.bubbleSort(NUMBERS_ARRAY);
+    int [] insertionSortResult = SortUtils.insertionSort(NUMBERS_ARRAY);
+
+    assertArrayEquals(SORTED_ARRAY, quickSortResult);
+    assertArrayEquals(SORTED_ARRAY, bubbleSortResult);
+    assertArrayEquals(SORTED_ARRAY, insertionSortResult);
+    
+}
+```
+
+**Better**
+
+The following example is better than the last one, because each test cases verifies one sorting method at a time.
+Of course, these are minimal examples and in a real test class more cases should be covered.
+
+```java
+
+final static int [] NUMBERS_ARRAY = {10, 1, 5 , -5, 0};
+final static int [] SORTED_ARRAY  = {-5, 0, 1, 5, 10};
+
+void quickSort_Should_Return_Sorted_Array(){
+    int [] quickSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    assertArrayEquals(SORTED_ARRAY, quickSortResult);    
+}
+
+void bubbleSort_Should_Return_Sorted_Array(){
+    int [] bubbleSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    assertArrayEquals(SORTED_ARRAY, bubbleSortResult);
+}
+
+void insertionSort_Should_Return_Sorted_Array(){
+    int [] insertionSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    assertArrayEquals(SORTED_ARRAY, insertionSortResult);
+}
+```
 
 ## Write isolated unit tests
 
-talk about multiple assertions
+Unit tests should run in complete isolation. When you write a unit test make sure it does not depend on any external resource or other unit tests.
+Examples of external resources can be a database, the file system, a REST or SOAP web service, etc.
+
+When the component under test has a hard dependency on a resource (it cannot be run without it), you can create a "fake" copy of the dependency and define its behavior for each test case. This practice is called **Mocking** and many libraries and frameworks make it possible to mock dependencies and define their behavior.
+Powermock, Mockito and Easymock are example of libraries you can use with JUnit/Java .
+
+**Bad example**
+
+Consider the following java class which represents a "simplified" BankAccount.
+
+```java
+public class BankAccount {
+
+    private AccountService accountService;
+
+    public BankAccount(AccountService accountService){
+        this.accountService = AccountService();
+    }
+
+    public BigDecimal getBalance(Integer accountNumber) {
+        return accountService.getBalance(accountNumber);
+    }
+}
+```
+In the following test is not isolated. Why ? we want to test that the BankAccount.getBalance() method returns the correct balance. 
+We do not care about the AccountService class here (Remember, Test one thing at a time). However, the test class seems to create a real instance of AccountService.
+This can cause problems since we depend on a "real" service even if it is "dev" service. 
+Moreover, Running against a real service can corrupt data or create unwanted side effects.
+
+```java
+class BankAccountTest {
+
+    private AccountService accountService;
+    private BankAccount bankAccountInstance;
+    private final Integer ACCOUNT_NUMBER = 123456789;
+    
+
+    @BeforeEach
+    void init(){
+      accountService = AccountService.getInstance(); // Real instance !
+      bankAccountInstance = new BankAccount(accountService);
+    }
+
+    @Test
+    void getBalance_Should_Return_Correct_Balance(){
+        final BigDecimal EXPECTED_AMT = 100.00;
+
+        BigDecimal actualBalance = bankAccountInstance.getBalance(ACCOUNT_NUMBER);
+
+        assertEquals(EXPECTED_AMT, actualBalance);
+    }
+```
+
+**Better**
+
+To improve the BankAccountTest class we can mock the AccountService class like in the following example.
+
+```java
+class BankAccountTest {
+
+    @Mock
+    private AccountService accountServiceMock;
+
+    private BankAccount bankAccountInstance;
+    private final Integer ACCOUNT_NUMBER = 123456789;
+    
+
+    @BeforeEach
+    void init(){
+      accountServiceMock = mock(AccountService.class); // create a mock
+      bankAccountInstance = new BankAccount(accountServiceMock); // Use the mock
+      when(accountServiceMock.getBalance(ACCOUNT_NUMBER)).thenReturn(EXPECTED_AMT); // Define the behavior
+    }
+
+    @Test
+    void getBalance_Should_Return_Correct_Balance(){
+        final BigDecimal EXPECTED_AMT = 100.00;
+
+        BigDecimal actualBalance = bankAccountInstance.getBalance(ACCOUNT_NUMBER);
+
+        assertEquals(EXPECTED_AMT, actualBalance);
+    }
+```
+
+
 
 ## Write fast unit tests
 
+As mentioned before, fastness is one of the characteristics of a good unit test. Try to make your unit tests fast enough. 
+Slow unit tests may discourage developers to run them as frequently as they should, especially when they change code, which can lead to regression.
+In addition, when unit tests are part of a CI/CD pipeline (which is a good thing btw), they can slow the whole process.
+
+To be more precise, and this is my opinion, a unit test should not take more than 500ms to run. Any test that takes a long time to be run should be reworked.
+
+When a unit test is slow, most likely it is doing something it shouldn't be doing like accessing the file system or an external resource. 
+
 ## Avoid logic in unit tests
 
-## Test public methods
+When you write unit tests, you should avoid logical structures such as conditions and loops. Adding unnecessary logic to your unit tests increases the chances of introducing new bugs in your tests. When a unit test fails, it should be an indicator that something went wrong in the production code and not in the unit test itself.
 
-Validate private methods using public methods. Test only public methods.
+If you find yourself in a situation where it is unavoidable to add logic to a unit test, you can for example try to split the test into two or more unit tests.
+
+In addition to the above, having simple, clear and readable unit tests is primordial, as discussed before.
+
+// example with for and parametrized test
+
+
+
+
+## Validate private methods using public methods
+
+While is it possible to test private methods individually, it is good a practice to test only the public methods.
+Private methods will never exist alone in an application (at least in java) but will be most likely used by one or more public methods as part of their implementation.
+You should however try to achieve high coverage in terms of lines of code, branches and of course, private methods.
+// example: Two private methods, one public method, two branches
+
 
 ## Cover the maximum you can
 
-	types of coverage
-		line + branch
-		https://dzone.com/articles/unit-testing-best-practices-how-to-get-the-most-ou
+Coverage is the measurement of how much production code is covered by unit tests. The most common types of code coverage are line coverage and branch coverage. 
+
+Line coverage refers to how many statements are covered by the tests; a statement is usually a line of code that does not include comments. High line coverage means that more production code is executed during the tests, which means that chances of having undetected bugs are low.
+Branch coverage on the other hand refers to how many different branches are executed by your tests. Branches are usually created using conditional statements (if, for, while etc). A test case that covers 100% of lines (which is hard to achieve ) does not necessarily cover 100% of the branches. How is that possible? Consider the following method in java :
+ 
+
+public String getPersonName(boolean isStudent) {
+    Person person = null;
+    if (isStudent) {
+        person = new Person(); 
+    }
+    return person.getName(); 
+}
+
+Consider the following test case :
+@Test
+void getPersonName_Returns_A_Name_when_Person_IsStudent(){
+	assertNotNull(getPersonName(true));
+} 
+
+This test case calls the method with the parameter=true and covers all the lines of the function getPersonName(). Is this good enough? The answer is no! Why?  The branch coverage of that test is only 50% because of you call the method with the parameter false you will get a NullPointerException, so you need to add another test case to increase branch coverage.
+
+// mention tools , automation
 
 ## Avoid magic values
 
-## No side effects
+Like in production code, using and naming variables in unit tests is important. A magic value is a value that you use in a test without giving any context about that value. This may confuse the readers of your test as they will wonder why a certain value was used, rather than focusing on the test itself.
+
+When writing unit tests, you should try to express intent as much as possible. Instead of using magic strings, a good approach is to use constants.
+
+BAD :
+GOOD :
 
 ## Test edge cases
 
+Edge cases can be defined as a subset of tests that check extreme edges of valid inputs. Testing edge cases reduces the chances of getting errors in production code since errors tend to arise at extreme conditions.
+
+
+// examples
+Consider the following class Counter that … clients … 
+These tests are good but cover cover the casual cases which are init , increment works correctly
+However what will happen if we reached the max capacity …
+
+
 ## Learn your testing framework
 
+It is always better to learn the maximum of features, assertions and tools that your testing framework offers. Using the appropriate features will certainly make your unit tests code more readable, elegant and reliable.
+
+Whenever you find a bug, write a test case to cover it before fixing it
