@@ -1,0 +1,96 @@
+---
+slug: "/unit-testing-best-practices/isolated-tests/"
+title: "Write isolated unit tests"
+sidebar_label: "Write isolated unit tests"
+sidebar_position: 6
+keywords:
+    - Write Isolated Unit Tests
+    - Independent unit tests
+    - Unit test best practices
+description: "Unit tests best practices. Write independent unit tests. Write isolated unit tests."
+---
+
+Unit tests should run in complete isolation. When you write a unit test make sure it does not depend on any external resource or other unit tests.
+Examples of external resources can be a database, the file system, a REST or SOAP web service, etc.
+
+When the component under test has a hard dependency on a resource (it cannot be run without it), you can create a "fake" copy of the dependency and define its behavior for each test case. This practice is called **Mocking** and many libraries and frameworks make it possible to mock dependencies and define their behavior.
+Powermock, Mockito and Easymock are example of libraries you can use with JUnit/Java .
+
+### Example
+
+Consider the following java class which represents a "simplified" BankAccount.
+
+```java
+public class BankAccount {
+
+    private AccountService accountService;
+
+    public BankAccount(AccountService accountService){
+        this.accountService = AccountService();
+    }
+
+    public BigDecimal getBalance(Integer accountNumber) {
+        return accountService.getBalance(accountNumber);
+    }
+}
+```
+
+In the following test is not isolated. Why ? we want to test that the BankAccount.getBalance() method returns the correct balance. 
+We do not care about the AccountService class here (Remember, Test one thing at a time). However, the test class seems to create a real instance of AccountService.
+This can cause problems since we depend on a "real" service even if it is "dev" service. 
+Moreover, Running against a real service can corrupt data or create unwanted side effects.
+
+```java
+class BankAccountTest {
+
+    private AccountService accountService;
+    private BankAccount bankAccountInstance;
+    private final Integer ACCOUNT_NUMBER = 123456789;
+    
+
+    @BeforeEach
+    void init(){
+      accountService = AccountService.getInstance(); // Real instance !
+      bankAccountInstance = new BankAccount(accountService);
+    }
+
+    @Test
+    void getBalance_Should_Return_Correct_Balance(){
+        final BigDecimal EXPECTED_AMT = 100.00;
+
+        BigDecimal actualBalance = bankAccountInstance.getBalance(ACCOUNT_NUMBER);
+
+        assertEquals(EXPECTED_AMT, actualBalance);
+    }
+```
+
+### Improved example
+
+To improve the BankAccountTest class we can mock the AccountService class like in the following example.
+
+```java
+class BankAccountTest {
+
+    @Mock
+    private AccountService accountServiceMock;
+
+    private BankAccount bankAccountInstance;
+    private final Integer ACCOUNT_NUMBER = 123456789;
+    
+
+    @BeforeEach
+    void init(){
+      accountServiceMock = mock(AccountService.class); // create a mock
+      bankAccountInstance = new BankAccount(accountServiceMock); // Use the mock
+      when(accountServiceMock.getBalance(ACCOUNT_NUMBER)).thenReturn(EXPECTED_AMT); // Define the behavior
+    }
+
+    @Test
+    void getBalance_Should_Return_Correct_Balance(){
+        final BigDecimal EXPECTED_AMT = 100.00;
+
+        BigDecimal actualBalance = bankAccountInstance.getBalance(ACCOUNT_NUMBER);
+
+        assertEquals(EXPECTED_AMT, actualBalance);
+    }
+```
