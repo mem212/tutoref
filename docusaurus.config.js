@@ -71,6 +71,10 @@ const config = {
             to: '/java/',
           },
           {
+            label: 'Software Quality',
+            to: '/software-quality/',
+          },
+          {
             label: 'Miscellaneous',
             to: '/miscellaneous/',
           },
@@ -90,6 +94,14 @@ const config = {
               {
                 label: 'Home',
                 to: '/',
+              },
+              {
+                label: 'Java',
+                to: '/java/',
+              },
+              {
+                label: 'Software Quality',
+                to: '/software-quality/',
               },
               {
                 label: 'Miscellaneous',
