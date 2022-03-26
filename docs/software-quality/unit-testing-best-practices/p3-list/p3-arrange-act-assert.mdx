@@ -1,0 +1,32 @@
+---
+slug: "/unit-testing-best-practices/arrange-act-assert/"
+title: "Arrange Act Assert"
+sidebar_label: "Arrange Act Assert"
+sidebar_position: 3
+keywords:
+    - AAA
+    - Arrange Act Assert
+    - Unit test best practices
+description: "Unit tests best practices. AAA. Arrange Act Assert."
+---
+
+Your unit test should be well structured. The Arrange-Act-Assert is a commonly used pattern where you structure the test case code into three main sections :
+
+### 1- Arrange
+
+In this section, set-up whatever objects and variables your test case does need. This step can be complementary to the general set-up step if there are any (Example: methods marked with @Before or @BeforeEach annotations when using JUnit Jupiter).
+
+
+### 2- Act
+
+This is the step where you call the target behavior. In most of cases it will be a method call.
+
+### 3- Assert
+
+In this step you verify that the expected result match the obtained result. The assert step determines if the test case has failed or succeeded.
+It is OK ot have multiple assertions in the same test case as long as you test the same behavior.
+
+:::note
+You do not have to stick to the AAA comments, you can decide to not use them or replace them with your own comments as long as the separation between the setup, what is being tested, and verification steps is clear.
+:::
+
