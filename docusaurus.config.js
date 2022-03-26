@@ -79,6 +79,10 @@ const config = {
             to: '/miscellaneous/',
           },
           {
+            label: 'Cybersecurity',
+            to: '/cybersecurity/',
+          },
+          {
             label: 'Tags',
             href: '/tags/',
             position: 'right',
