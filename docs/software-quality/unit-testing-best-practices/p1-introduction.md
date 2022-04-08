@@ -12,7 +12,7 @@ keywords:
 description: "Unit testing best practices. JUnit best practices."
 ---
 
-# Units testing best practices
+# Unit testing best practices
 ## Introduction
 
 ### Summary
