@@ -1,0 +1,69 @@
+---
+slug: "/unit-testing-best-practices/test-one-thing/"
+title: "Test one thing at a time"
+sidebar_label: "Test one thing at a time"
+sidebar_position: 5
+keywords:
+    - Test one thing at a time
+    - Unit test best practices
+description: "Unit tests best practices. Test one thing at a time."
+---
+
+The Idea behind unit testing is to verify that each "separate" unit of your software is working as expected.
+Tests that verify combined components at the same time are generally called integration tests. 
+
+Unit tests and integration tests both enhance the overall quality of production code but the reason of existing of each type of tests is different.
+
+When writing a test case, you should validate only one "thing" at a time. This way you will be focused only on that "thing" and when the test fails, you can address the problem without confusion or too much investigation.
+
+
+### Example
+
+In the following example, the SortUtils class offers a few methods to sort arrays. 
+The test case testSortUtils() is bad because it verifies **three methods** at once.
+
+```java
+
+@Test
+void testSortUtils(){
+
+    final int [] NUMBERS_ARRAY = {10, 1, 5 , -5, 0};
+    final int [] SORTED_ARRAY = {-5, 0, 1, 5, 10};
+
+    int [] quickSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    int [] bubbleSortResult = SortUtils.bubbleSort(NUMBERS_ARRAY);
+    int [] insertionSortResult = SortUtils.insertionSort(NUMBERS_ARRAY);
+
+    assertArrayEquals(SORTED_ARRAY, quickSortResult);
+    assertArrayEquals(SORTED_ARRAY, bubbleSortResult);
+    assertArrayEquals(SORTED_ARRAY, insertionSortResult);
+    
+}
+```
+
+### Improved example
+
+The following example is better than the last one, because each test cases verifies one sorting method at a time.
+Of course, these are minimal examples and in a real test class more cases should be covered.
+
+```java
+
+final static int [] NUMBERS_ARRAY = {10, 1, 5 , -5, 0};
+final static int [] SORTED_ARRAY  = {-5, 0, 1, 5, 10};
+
+void quickSort_Should_Return_Sorted_Array(){
+    int [] quickSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    assertArrayEquals(SORTED_ARRAY, quickSortResult);    
+}
+
+void bubbleSort_Should_Return_Sorted_Array(){
+    int [] bubbleSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    assertArrayEquals(SORTED_ARRAY, bubbleSortResult);
+}
+
+void insertionSort_Should_Return_Sorted_Array(){
+    int [] insertionSortResult = SortUtils.quicksort(NUMBERS_ARRAY);
+    assertArrayEquals(SORTED_ARRAY, insertionSortResult);
+}
+```
+
