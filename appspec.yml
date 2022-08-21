@@ -1,0 +1,14 @@
+# This is an appspec.yml template file for use AWS CodeDeploy when deploying on EC2/On-Premises.
+
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /var/www/html/tutoref
+
+permissions:
+  - object: /
+    pattern: "**"
+    owner: www-data
+    group: www-data
