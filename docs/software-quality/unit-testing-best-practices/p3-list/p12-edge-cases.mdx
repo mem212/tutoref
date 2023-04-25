@@ -1,0 +1,132 @@
+---
+slug: "/unit-testing-best-practices/test-edge-cases/"
+title: "Test edge cases"
+sidebar_label: "Test edge cases"
+sidebar_position: 12
+keywords:
+    - Test edge cases
+    - Unit test best practices
+description: "Unit tests best practices. Test edge cases."
+---
+
+Edge cases can be defined as a subset of tests that check extreme limits of valid input values.
+Testing edge cases reduces the chances of getting errors in production code since errors tend to arise at extreme conditions.
+
+To illustrate this we will use the following Counter class. 
+It does simply hold the count of clients inside a store and offer methods to increase, decrease and get the clients count.
+
+```java
+public class Counter {
+
+    public final static int MAX_CAPACITY = 2000;
+
+    private int count; // implicitly initialized to Zero
+
+    public void increaseCount() throws MaximumCapacityReachedException {
+        if(MAX_CAPACITY == count){
+            throw new MaximumCapacityReachedException();
+        }
+        count++;
+    }
+
+    public void decreaseCount() throws MinimumCapacityReachedException {
+        if(MAX_CAPACITY == 0){
+            throw new MinimumCapacityReachedException();
+        }
+        count--;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+}
+
+```
+
+### Example
+
+The following unit tests are not really bad like the title suggests, but they are not enough.
+They simply validate the basic use cases of the counter which are the count increment, decrement and initialization.
+
+
+```java
+class EdgeCasesTest {
+
+    Counter counter;
+
+    @BeforeEach
+    void init(){
+        counter = new Counter();
+    }
+
+    @Test
+    void counterInitializedToZero(){
+
+        final int INIT_VALUE = 0;
+
+        assertEquals(INIT_VALUE, counter.getCount());
+    }
+
+    @Test
+    void increaseNum_Increment_By_One_When_Invoked() throws MaximumCapacityReachedException {
+
+        final int EXPECTED_VALUE = 1;
+
+        counter.increaseCount();
+
+        assertEquals(EXPECTED_VALUE, counter.getCount());
+    }
+
+    @Test
+    void decreaseNum_Decrement_By_One_When_Invoked() throws MaximumCapacityReachedException {
+
+        final int EXPECTED_VALUE = 1;
+
+        counter.decreaseCount();
+
+        assertEquals(EXPECTED_VALUE, counter.getCount());
+    }
+}
+
+```
+
+However, you should ask questions like :
+- What happens if we try to increment the counter after reaching the limit;
+- What happens if we try to decrement the counter right after the instantiation (count == 0);
+- Any other edge cases ?
+
+
+### Improved example
+
+To address the previous problem we can add test cases to cover those edge cases.
+For the example we will just make sure we get the appropriate exception.
+
+```java
+
+@Test
+void increaseCount_Throws_MaximumCapacityReachedException_When_Max_Val_Reached(){
+
+    // Note: There is no setter ion the example above but you can add one
+    counter.setCount(Counter.MAX_CAPACITY);
+
+    assertThrows(
+            MaximumCapacityReachedException.class,
+            ()->counter.increaseCount()
+    );
+
+}
+
+@Test
+void decreaseCount_Throws_MinimumCapacityReachedException_When_Count_Is_Zero(){
+
+    // Note : Counter is implicitly initialized to Zero when instantiated.
+
+    assertThrows(
+            MinimumCapacityReachedException.class,
+            ()->counter.decreaseCount()
+    );
+
+}
+```
+

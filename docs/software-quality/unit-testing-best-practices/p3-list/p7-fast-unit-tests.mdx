@@ -1,0 +1,22 @@
+---
+slug: "/unit-testing-best-practices/write-fast-tests/"
+title: "Write fast unit tests"
+sidebar_label: "Write fast unit tests"
+sidebar_position: 7
+keywords:
+    - Fast unit tests
+    - Rapid unit tests
+    - Unit test best practices
+description: "Unit tests best practices. Fast unit tests. Rapid unit tests."
+---
+
+As mentioned before, fastness is one of the characteristics of a good unit test. Try to make your unit tests fast enough. 
+Slow unit tests may discourage developers to run them as frequently as they should, especially when they change code, which can lead to regression.
+In addition, when unit tests are part of a CI/CD pipeline (which is a good thing btw), they can slow the whole process.
+
+To be more precise, and this is my opinion, a unit test should not take more than 500ms to run. Any test that takes a long time to be run should be reworked.
+
+When a unit test is slow, most likely it is doing something it shouldn't be doing like accessing the file system or an external resource. 
+
+
+
