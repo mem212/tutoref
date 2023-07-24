@@ -8,7 +8,7 @@ const { SitemapAndIndexStream } = require('sitemap');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TutoRef.com',
-  tagline: 'The reference of tech tutorials and code examples_',
+  tagline: 'Tutorials and Code Examples_',
   url: 'https://tutoref.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
