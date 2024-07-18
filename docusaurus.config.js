@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require('prism-react-renderer').themes.github;
+const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 const { SitemapAndIndexStream } = require('sitemap');
 
 /** @type {import('@docusaurus/types').Config} */
@@ -29,26 +29,21 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        gtag: {
+          trackingID: 'UA-126228996-1',
+          anonymizeIP: true,
+        },
       }),
     ],
   ], 
   plugins: [
     [
-      '@docusaurus/plugin-google-analytics',
-      {
-        id: "analytics-main"
-      }
-    ],
-    [
       '@docusaurus/plugin-sitemap',
       {
-        id: "main-sitemap",
-        changefreq: 'weekly',
-        priority: 0.5
-      }
+        changefreq: 'daily',
+      },
     ],
-    'docusaurus-plugin-google-adsense',
-  ] ,
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -147,15 +142,15 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['java']
       },
-      googleAnalytics: {
-        trackingID: 'UA-126228996-1',
-        // Optional fields.
-        anonymizeIP: true, // Should IPs be anonymized?
-      },
-      googleAdsense: {
-        dataAdClient: 'ca-pub-8667333994890115',
-      }
     }),
+    // custom scripts
+    scripts: [
+      {
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        async: true,
+        'data-ad-client': 'ca-pub-8667333994890115',
+      },
+    ],
 };
 
 module.exports = config;
