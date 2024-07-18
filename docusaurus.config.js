@@ -40,6 +40,7 @@ const config = {
     [
       '@docusaurus/plugin-sitemap',
       {
+        id: "main-sitemap",
         changefreq: 'daily',
       },
     ],
